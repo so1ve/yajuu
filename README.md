@@ -11,7 +11,7 @@ Yajuu Configuration Loader
 - Multiple sources merged with [unjs/defu](https://github.com/unjs/defu)
 - `.env` support with [dotenv](https://www.npmjs.com/package/dotenv)
 - Reads config from the nearest `package.json` file
-- [Extends configurations](https://github.com/unjs/c12#extending-configuration) from multiple local or git sources
+- [Extends configurations](https://github.com/so1ve/yajuu#extending-configuration) from multiple local or git sources
 - Overwrite with [environment-specific configuration](#environment-specific-configuration)
 - Config watcher with auto-reload and HMR support
 
@@ -21,20 +21,20 @@ Install package:
 
 ```sh
 # npm
-npm install c12
+npm install yajuu
 
 # yarn
-yarn add c12
+yarn add yajuu
 
 # pnpm
-pnpm install c12
+pnpm install yajuu
 ```
 
 Import:
 
 ```js
 // ESM
-import { loadConfig, watchConfig } from "c12";
+import { loadConfig, watchConfig } from "yajuu";
 ```
 
 Load configuration:
@@ -49,7 +49,7 @@ const { config, configFile, layers } = await loadConfig({});
 
 ## Loading priority
 
-c12 merged config sources with [unjs/defu](https://github.com/unjs/defu) by below order:
+yajuu merged config sources with [unjs/defu](https://github.com/unjs/defu) by below order:
 
 1. Config overrides passed by options
 2. Config file in CWD
@@ -93,7 +93,7 @@ Loads `.env` file if enabled. It is disabled by default.
 
 Loads config from nearest `package.json` file. It is disabled by default.
 
-If `true` value is passed, c12 uses `name` field from `package.json`.
+If `true` value is passed, yajuu uses `name` field from `package.json`.
 
 You can also pass either a string or an array of strings as a value to use those fields.
 
@@ -132,7 +132,7 @@ Extending can be nested and each layer can extend from one base or more.
 The final config is merged result of extended options and user options with [unjs/defu](https://github.com/unjs/defu).
 
 Each item in extends is a string that can be either an absolute or relative path to the current config file pointing to a config file for extending or the directory containing the config file.
-If it starts with either `github:`, `gitlab:`, `bitbucket:`, or `https:`, c12 automatically clones it.
+If it starts with either `github:`, `gitlab:`, `bitbucket:`, or `https:`, yajuu automatically clones it.
 
 For custom merging strategies, you can directly access each layer with `layers` property.
 
@@ -203,7 +203,7 @@ Users can define environment-specific configuration using these config keys:
 - `$production: {...}`
 - `$env: { [env]: {...} }`
 
-c12 tries to match [`envName`](#envname) and override environment config if specified.
+yajuu tries to match [`envName`](#envname) and override environment config if specified.
 
 **Note:** Environment will be applied when extending each configuration layer. This way layers can provide environment-specific configuration.
 
@@ -235,7 +235,7 @@ you can use `watchConfig` instead of `loadConfig` to load config and watch for c
 - `onUpdate`: This function is always called after the new config is updated. If `acceptHMR` returns true, it will be skipped.
 
 ```ts
-import { watchConfig } from "c12";
+import { watchConfig } from "yajuu";
 
 const config = watchConfig({
   cwd: ".",

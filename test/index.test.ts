@@ -10,7 +10,7 @@ const r = (path: string) =>
 const transformPaths = (object: object) =>
   JSON.parse(JSON.stringify(object).replaceAll(r("."), "<path>/"));
 
-describe("c12", () => {
+describe("yajuu", () => {
   it("load fixture config", async () => {
     type UserConfig = Partial<{
       virtual: boolean;
@@ -21,7 +21,7 @@ describe("c12", () => {
     const { config, layers } = await loadConfig<UserConfig>({
       cwd: r("./fixture"),
       dotenv: true,
-      packageJson: ["c12", "c12-alt"],
+      packageJson: ["yajuu", "yajuu-alt"],
       globalRc: true,
       envName: "test",
       extend: {
@@ -106,7 +106,7 @@ describe("c12", () => {
             "extends": [
               "./config.dev",
               [
-                "c12-npm-test",
+                "yajuu-npm-test",
                 {
                   "userMeta": 123,
                 },
@@ -184,10 +184,10 @@ describe("c12", () => {
           "config": {
             "npmConfig": true,
           },
-          "configFile": "<path>/fixture/node_modules/c12-npm-test/config.ts",
-          "cwd": "<path>/fixture/node_modules/c12-npm-test",
+          "configFile": "<path>/fixture/node_modules/yajuu-npm-test/config.ts",
+          "cwd": "<path>/fixture/node_modules/yajuu-npm-test",
           "meta": {},
-          "source": "<path>/fixture/node_modules/c12-npm-test/config.ts",
+          "source": "<path>/fixture/node_modules/yajuu-npm-test/config.ts",
           "sourceOptions": {
             "userMeta": 123,
           },
@@ -205,7 +205,7 @@ describe("c12", () => {
     const { config } = await loadConfig({
       cwd: r("./fixture/new_dir"),
       overrides: {
-        extends: ["github:unjs/c12/test/fixture"],
+        extends: ["github:so1ve/yajuu/test/fixture"],
       },
     });
 

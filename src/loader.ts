@@ -241,8 +241,8 @@ async function resolveConfig<
       url.protocol + url.pathname.split("/").slice(0, 2).join("/");
     const name = gitRepo.replace(/[#/:@\\]/g, "_");
     const tmpDir = process.env.XDG_CACHE_HOME
-      ? resolve(process.env.XDG_CACHE_HOME, "c12", name)
-      : resolve(homedir(), ".cache/c12", name);
+      ? resolve(process.env.XDG_CACHE_HOME, "yajuu", name)
+      : resolve(homedir(), ".cache/yajuu", name);
     if (existsSync(tmpDir)) {
       await rm(tmpDir, { recursive: true });
     }

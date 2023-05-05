@@ -1,9 +1,9 @@
 {
   "name": "fixture",
-  "c12": {
+  "yajuu": {
     "packageJSON": true
   },
-  "c12-alt": {
+  "yajuu-alt": {
     "packageJSON2": true
   }
 }
