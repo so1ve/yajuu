@@ -1,0 +1,83 @@
+{
+  "name": "yajuu",
+  "version": "0.0.0",
+  "packageManager": "pnpm@8.4.0",
+  "author": "Ray <i@mk1.io> (@so1ve)",
+  "description": "",
+  "keywords": [],
+  "type": "module",
+  "homepage": "https://github.com/so1ve/yajuu#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/so1ve/yajuu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/so1ve/yajuu/issues"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "nr build",
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "start": "tsx src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "defu": "^6.1.2",
+    "dotenv": "^16.0.3",
+    "giget": "^1.1.2",
+    "kazuya": "^0.2.0",
+    "mlly": "^1.2.0",
+    "ohash": "^1.1.2",
+    "pathe": "^1.1.0",
+    "perfect-debounce": "^1.0.0",
+    "pkg-types": "^1.0.3",
+    "rc9": "^2.1.0"
+  },
+  "devDependencies": {
+    "@antfu/ni": "^0.21.3",
+    "@babel/types": "^7.21.5",
+    "@so1ve/eslint-config": "^0.74.0",
+    "@types/node": "^18.16.3",
+    "@vitest/coverage-c8": "^0.31.0",
+    "bumpp": "^9.1.0",
+    "eslint": "^8.39.0",
+    "expect-type": "^0.15.0",
+    "prettier": "^2.8.8",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4",
+    "unbuild": "^1.2.1",
+    "vite": "^4.3.4",
+    "vitest": "^0.31.0"
+  }
+}
