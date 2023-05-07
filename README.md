@@ -191,7 +191,14 @@ const config = {
 
 Layers:
 
+<!-- eslint-skip -->
+
 ```js
+[
+ { config: /* theme config */, configFile: /* path/to/theme/config.ts */, cwd: /* path/to/theme */ },
+ { config: /* base  config */, configFile: /* path/to/base/config.ts  */, cwd: /* path/to/base */ },
+ { config: /* dev   config */, configFile: /* path/to/config.dev.ts  */, cwd: /* path/ */ },
+]
 ```
 
 ## Environment-specific configuration
