@@ -209,7 +209,9 @@ yajuu tries to match [`envName`](#envname) and override environment config if sp
 
 **Example:**
 
-```
+<!-- eslint-skip -->
+
+```js
 {
   // Default configuration
   logLevel: 'info',
