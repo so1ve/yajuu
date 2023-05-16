@@ -257,6 +257,7 @@ const config = watchConfig({
     const diff = getDiff();
     if (diff.length === 0) {
       console.log("No config changed detected!");
+
       return true; // No changes!
     }
   },
