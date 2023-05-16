@@ -14,7 +14,7 @@ import { loadConfig } from "./loader";
 
 export type ConfigWatcher<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 > = ResolvedConfig<T, MT> & {
   watchingFiles: string[];
   unwatch: () => Promise<void>;
@@ -22,7 +22,7 @@ export type ConfigWatcher<
 
 export interface WatchConfigOptions<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 > extends LoadConfigOptions<T, MT> {
   chokidarOptions?: WatchOptions;
   debounce?: false | number;
@@ -53,7 +53,7 @@ const eventMap = {
 
 export async function watchConfig<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 >(options: WatchConfigOptions<T, MT>): Promise<ConfigWatcher<T, MT>> {
   let config = await loadConfig<T, MT>(options);
 
@@ -67,7 +67,7 @@ export async function watchConfig<
         .filter((l) => l.cwd)
         .flatMap((l) => [
           ...["ts", "js", "mjs", "cjs", "cts", "mts", "json"].map((ext) =>
-            resolve(l.cwd!, `${configFileName}.${ext}`)
+            resolve(l.cwd!, `${configFileName}.${ext}`),
           ),
           l.source && resolve(l.cwd!, l.source),
           // TODO: Support watching rc from home and workspace
@@ -76,11 +76,11 @@ export async function watchConfig<
               l.cwd!,
               typeof options.rcFile === "string"
                 ? options.rcFile
-                : `.${configName}rc`
+                : `.${configName}rc`,
             ),
           options.packageJson && resolve(l.cwd!, "package.json"),
         ])
-        .filter(Boolean)
+        .filter(Boolean),
     ),
   ] as string[];
 
@@ -89,7 +89,7 @@ export async function watchConfig<
     ...options.chokidarOptions,
   });
 
-  const onChange = async (event: string, path: string) => {
+  async function onChange(event: string, path: string) {
     const type = eventMap[event as keyof typeof eventMap];
     if (!type) {
       return;
@@ -117,7 +117,7 @@ export async function watchConfig<
     if (options.onUpdate) {
       await options.onUpdate(changeCtx);
     }
-  };
+  }
 
   if (options.debounce === false) {
     _fswatcher.on("all", onChange);
@@ -137,6 +137,7 @@ export async function watchConfig<
       if (prop in utils) {
         return utils[prop as keyof typeof utils];
       }
+
       return config[prop as keyof ResolvedConfig<T, MT>];
     },
   });

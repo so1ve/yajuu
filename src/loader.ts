@@ -21,7 +21,7 @@ import type {
 
 export async function loadConfig<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 >(options: LoadConfigOptions<T, MT>): Promise<ResolvedConfig<T, MT>> {
   // Normalize options
   options.cwd = resolve(process.cwd(), options.cwd ?? ".");
@@ -76,19 +76,19 @@ export async function loadConfig<
     if (options.globalRc) {
       Object.assign(
         configRC,
-        rc9.readUser({ name: options.rcFile, dir: options.cwd })
+        rc9.readUser({ name: options.rcFile, dir: options.cwd }),
       );
       const workspaceDir = await findWorkspaceDir(options.cwd).catch(() => {});
       if (workspaceDir) {
         Object.assign(
           configRC,
-          rc9.read({ name: options.rcFile, dir: workspaceDir })
+          rc9.read({ name: options.rcFile, dir: workspaceDir }),
         );
       }
     }
     Object.assign(
       configRC,
-      rc9.read({ name: options.rcFile, dir: options.cwd })
+      rc9.read({ name: options.rcFile, dir: options.cwd }),
     );
   }
 
@@ -115,7 +115,7 @@ export async function loadConfig<
     config,
     configRC,
     pkgJson,
-    options.defaultConfig
+    options.defaultConfig,
   ) as T;
 
   // Allow extending
@@ -152,7 +152,7 @@ export async function loadConfig<
 
 async function extendConfig<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 >(config: InputConfig<T, MT>, options: LoadConfigOptions<T, MT>) {
   (config as any)._layers = config._layers || [];
   if (!options.extend) {
@@ -166,8 +166,8 @@ async function extendConfig<
   for (const key of keys!) {
     extendSources.push(
       ...(Array.isArray(config[key]) ? config[key] : [config[key]]).filter(
-        Boolean
-      )
+        Boolean,
+      ),
     );
     delete config[key];
   }
@@ -187,8 +187,8 @@ async function extendConfig<
 
       console.warn(
         `Cannot extend config from \`${JSON.stringify(
-          originalExtendSource
-        )}\` in ${options.cwd!}`
+          originalExtendSource,
+        )}\` in ${options.cwd!}`,
       );
       continue;
     }
@@ -197,7 +197,7 @@ async function extendConfig<
       // TODO: Use error in next major versions
 
       console.warn(
-        `Cannot extend config from \`${extendSource}\` in ${options.cwd!}`
+        `Cannot extend config from \`${extendSource}\` in ${options.cwd!}`,
       );
       continue;
     }
@@ -219,11 +219,11 @@ const NPM_PACKAGE_RE =
 
 async function resolveConfig<
   T extends UserInputConfig = UserInputConfig,
-  MT extends ConfigLayerMeta = ConfigLayerMeta
+  MT extends ConfigLayerMeta = ConfigLayerMeta,
 >(
   source: string,
   options: LoadConfigOptions<T, MT>,
-  sourceOptions: SourceOptions<T, MT> = {}
+  sourceOptions: SourceOptions<T, MT> = {},
 ): Promise<ResolvedConfig<T, MT>> {
   // Custom user resolver
   if (options.resolve) {
@@ -254,7 +254,7 @@ async function resolveConfig<
   if (NPM_PACKAGE_RE.test(source)) {
     try {
       source = normalize(
-        options.kazuya!.resolve(source, { paths: [options.cwd!] })
+        options.kazuya!.resolve(source, { paths: [options.cwd!] }),
       );
     } catch {}
   }
@@ -275,7 +275,7 @@ async function resolveConfig<
     res.configFile = normalize(
       options.kazuya!.resolve(resolve(cwd, source), {
         paths: [cwd],
-      })
+      }),
     );
   } catch {}
   if (!existsSync(res.configFile!)) {

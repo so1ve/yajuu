@@ -5,7 +5,8 @@ import * as dotenv from "dotenv";
 
 export interface DotenvOptions {
   /**
-   * The project root directory (either absolute or relative to the current working directory).
+   * The project root directory (either absolute or relative to the current
+   * working directory).
    */
   cwd: string;
 
@@ -19,6 +20,7 @@ export interface DotenvOptions {
    * Whether to interpolate variables within .env.
    *
    * @example
+   *
    * ```env
    * BASE_DIR="/test"
    * # resolves to "/test/further"
@@ -27,9 +29,7 @@ export interface DotenvOptions {
    */
   interpolate?: boolean;
 
-  /**
-   * An object describing environment variables (key, value pairs).
-   */
+  /** An object describing environment variables (key, value pairs). */
 
   env?: NodeJS.ProcessEnv;
 }
@@ -37,9 +37,8 @@ export interface DotenvOptions {
 export type Env = typeof process.env;
 
 /**
- * Load and interpolate environment variables into `process.env`.
- * If you need more control (or access to the values), consider using `loadDotenv` instead
- *
+ * Load and interpolate environment variables into `process.env`. If you need
+ * more control (or access to the values), consider using `loadDotenv` instead
  */
 export async function setupDotenv(options: DotenvOptions): Promise<Env> {
   const targetEnvironment = options.env ?? process.env;
@@ -91,18 +90,17 @@ export async function loadDotenv(options: DotenvOptions): Promise<Env> {
 function interpolate(
   target: Record<string, any>,
   source: Record<string, any> = {},
-  parse = (v: any) => v
+  parse = (v: any) => v,
 ) {
-  function getValue(key: string) {
-    // Source value 'wins' over target value
-    return source[key] === undefined ? target[key] : source[key];
-  }
+  const getValue = (key: string) =>
+    source[key] === undefined ? target[key] : source[key];
 
   function interpolate(value: unknown, parents: string[] = []): any {
     if (typeof value !== "string") {
       return value;
     }
     const matches: string[] = value.match(/(.?\${?(?:[\w:]+)?}?)/g) ?? [];
+
     return parse(
       matches.reduce((newValue, match) => {
         const parts = /(.?)\${?([\w:]+)?}?/g.exec(match) ?? [];
@@ -121,9 +119,10 @@ function interpolate(
           if (parents.includes(key)) {
             console.warn(
               `Please avoid recursive environment variables ( loop: ${parents.join(
-                " > "
-              )} > ${key} )`
+                " > ",
+              )} > ${key} )`,
             );
+
             return "";
           }
 
@@ -136,7 +135,7 @@ function interpolate(
         return value === undefined
           ? newValue
           : newValue.replace(replacePart, value);
-      }, value)
+      }, value),
     );
   }
 
