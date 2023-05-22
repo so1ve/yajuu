@@ -1,4 +1,5 @@
-import { existsSync, promises as fsp } from "node:fs";
+import { existsSync } from "node:fs";
+import fsp from "node:fs/promises";
 
 import { resolve } from "pathe";
 import * as dotenv from "dotenv";
@@ -99,11 +100,11 @@ function interpolate(
     if (typeof value !== "string") {
       return value;
     }
-    const matches: string[] = value.match(/(.?\${?(?:[\w:]+)?}?)/g) ?? [];
+    const matches: string[] = value.match(/(.?\$\{?[\w:]*\}?)/g) ?? [];
 
     return parse(
       matches.reduce((newValue, match) => {
-        const parts = /(.?)\${?([\w:]+)?}?/g.exec(match) ?? [];
+        const parts = /(.?)\$\{?([\w:]+)?\}?/.exec(match) ?? [];
         const prefix = parts[1];
 
         let value, replacePart: string;
