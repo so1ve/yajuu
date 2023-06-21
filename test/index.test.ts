@@ -1,7 +1,7 @@
 import { fileURLToPath } from "node:url";
 
-import { describe, expect, it } from "vitest";
 import { normalize } from "pathe";
+import { describe, expect, it } from "vitest";
 
 import { loadConfig } from "../src";
 

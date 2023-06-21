@@ -2,11 +2,11 @@ import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
 import { homedir } from "node:os";
 
-import { dirname, extname, normalize, resolve } from "pathe";
-import { createKazuya } from "kazuya";
-import * as rc9 from "rc9";
 import { defu } from "defu";
+import { createKazuya } from "kazuya";
+import { dirname, extname, normalize, resolve } from "pathe";
 import { findWorkspaceDir, readPackageJSON } from "pkg-types";
+import * as rc9 from "rc9";
 
 import { setupDotenv } from "./dotenv";
 import type {
