@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import fsp from "node:fs/promises";
 
-import { resolve } from "pathe";
 import * as dotenv from "dotenv";
+import { resolve } from "pathe";
 
 export interface DotenvOptions {
   /**

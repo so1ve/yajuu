@@ -1,16 +1,16 @@
 import type { WatchOptions } from "chokidar";
 import { watch } from "chokidar";
-import { debounce } from "perfect-debounce";
-import { resolve } from "pathe";
 import { diff } from "ohash";
+import { resolve } from "pathe";
+import { debounce } from "perfect-debounce";
 
+import { loadConfig } from "./loader";
 import type {
   ConfigLayerMeta,
   LoadConfigOptions,
   ResolvedConfig,
   UserInputConfig,
 } from "./types";
-import { loadConfig } from "./loader";
 
 export type ConfigWatcher<
   T extends UserInputConfig = UserInputConfig,
