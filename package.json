@@ -68,7 +68,7 @@
     "@babel/types": "^7.21.5",
     "@so1ve/eslint-config": "^0.110.0",
     "@types/node": "^18.16.4",
-    "@vitest/coverage-c8": "^0.32.0",
+    "@vitest/coverage-c8": "^0.33.0",
     "bumpp": "^9.1.0",
     "eslint": "^8.39.0",
     "expect-type": "^0.15.0",
@@ -77,6 +77,6 @@
     "typescript": "^5.0.4",
     "unbuild": "^1.2.1",
     "vite": "^4.3.4",
-    "vitest": "^0.32.0"
+    "vitest": "^0.34.0"
   }
 }
