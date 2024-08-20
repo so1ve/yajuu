@@ -71,7 +71,7 @@
     "@vitest/coverage-c8": "^0.32.0",
     "bumpp": "^9.1.0",
     "eslint": "^8.39.0",
-    "expect-type": "^0.15.0",
+    "expect-type": "^0.20.0",
     "prettier": "^2.8.8",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4",
